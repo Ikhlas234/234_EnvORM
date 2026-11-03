@@ -6,10 +6,6 @@ const db = require('./models');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.listen(port, () => {
-    console.log(`Server is running on 3000`);
-
-});
     db.sequelize.sync().then((result) => {
         app.listen(3000, () => {console.log('Server started')});
     }).catch((err) => {
