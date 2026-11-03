@@ -34,6 +34,5 @@ app.get('/komik', async (req, res) => {
     } catch (error) {
         res.send(error);
     }
-
     
 
