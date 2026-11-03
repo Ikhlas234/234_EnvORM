@@ -6,11 +6,15 @@ const db = require('./models');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-    db.sequelize.sync().then((result) => {
-        app.listen(3000, () => {console.log('Server started')});
-    }).catch((err) => {
-        console.log(err)
+    db.sequelize.sync({ alter: true })
+    .then(() => {
+        app.listen(port, () => {
+            console.log(`Server is running on http://localhost:${port}`);
+        });
     })
+    .catch((err) => {
+        console.log(err);
+    });
 
 app.post('/komik', async (req, res) => {
     const data = req.body;
