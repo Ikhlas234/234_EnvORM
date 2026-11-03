@@ -18,6 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.post('/komik', async (req, res) => {
     const data = req.body;
+    if (!data.type || !data.author) {
+        return res.status(400).send({ error: 'Field type dan author wajib diisi' });
+    }
     try {
         const komik = await db.Komik.create(data);
         res.send(komik);
