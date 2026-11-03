@@ -52,6 +52,9 @@ app.get('/komik/:id', async (req, res) => {
 app.put('/komik/:id', async (req, res) => {
     const id = req.params.id;
     const data = req.body;
+    if (Object.keys(data).length === 0) {
+        return res.status(400).send({ error: 'Data pembaruan tidak boleh kosong' });
+    }
     try {
         const komik = await db.Komik.findByPk(id);
         if (komik) {
